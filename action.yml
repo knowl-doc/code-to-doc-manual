@@ -13,7 +13,7 @@ runs:
     - name: Setup Environment (Push)  
       run: |  
         echo "COMMIT_SHA=${{ github.sha }}" >> ${GITHUB_ENV}
-        echo "REPO_NAME=${{ github.repository }}" >> ${GITHUB_ENV}
+        echo "REPO_NAME=${{ github.event.repository.name }}" >> ${GITHUB_ENV}
         echo "OWNER_NAME=${{ github.repository_owner }}" >> ${GITHUB_ENV}
         echo "KNOWL_BACKEND_HTTP=https://api.knowl.io/" >> ${GITHUB_ENV}
         echo "BRANCH_NAME=${{ github.ref_name }}" >> ${GITHUB_ENV}
