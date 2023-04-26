@@ -1,0 +1,39 @@
+name: Generate AI docs
+description: Generate AI doc
+inputs:
+  OPENAI_API_KEY:
+    description: OPENAI_API_KEY
+    required: true
+  KNOWL_API_KEY:
+    description: KNOWL_API_KEY
+    required: true
+runs:
+  using: composite
+  steps:
+    - name: Setup Environment (Push)  
+      run: |  
+        echo "COMMIT_SHA=${{ github.sha }}" >> ${GITHUB_ENV}
+        echo "REPO_NAME=${{ github.repository }}" >> ${GITHUB_ENV}
+        echo "OWNER_NAME=${{ github.repository_owner }}" >> ${GITHUB_ENV}
+        echo "KNOWL_BACKEND_HTTP=https://staging-api.knowl.io/" >> ${GITHUB_ENV}
+        echo "BRANCH_NAME=${{ github.ref_name }}" >> ${GITHUB_ENV}
+        echo "${{ github.action_path }}" >> "$GITHUB_PATH"
+      shell: bash
+    - name: setup python environment
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.9
+    - name: install python packages
+      run: |
+        python -m pip install --upgrade pip
+        pip install python-dotenv
+      shell: bash
+    - name: Prepare script file
+      run: chmod +x "${{ github.action_path }}/run-gen-docs.sh"
+      shell: bash
+    - name: Run the script file
+      run: run-gen-docs.sh ${{ github.workspace }}
+      shell: bash
+      env:
+        OPENAI_API_KEY: ${{inputs.OPENAI_API_KEY}}
+        KNOWL_API_KEY: ${{inputs.KNOWL_API_KEY}}
