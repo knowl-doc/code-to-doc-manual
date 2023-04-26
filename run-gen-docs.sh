@@ -97,6 +97,7 @@ cd s3/code_to_doc
 pip install -r requirements.txt
 python3.9 python_docs.py -p $REPO_PATH -o $RESULT_DIR
 cat $RESULT_DIR/id_to_pages.json
+ls ../
 cd ../importer
 npm install -g typescript@4.8.4
 npm install --save-dev -g ts-node@10.9.1
