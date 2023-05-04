@@ -17,16 +17,8 @@ then
     echo 'no repo path provided'
     exit 0
 fi
-FILES_DIFF=${2:-'files_diff.json'}
-REPO_PATH=${1}
 RESULT_DIR="result"
-
 RESULT_DIR=$(get_abs_filename ${RESULT_DIR})
-REPO_PATH=$(get_abs_filename ${REPO_PATH})
-FILES_DIFF=$(get_abs_filename ${FILES_DIFF})
-
-echo FILES_DIFF
-echo REPO_PATH
 echo RESULT_DIR
 
 mkdir -p ${RESULT_DIR}
@@ -97,9 +89,8 @@ cd s3/code_to_doc
 pip install -r requirements.txt
 python3.9 python_docs.py -p $REPO_PATH -o $RESULT_DIR
 cat $RESULT_DIR/id_to_pages.json
-ls ../
-cd ../importer
+cd ../knowl-utils
 npm install -g typescript@4.8.4
 npm install --save-dev -g ts-node@10.9.1
-npm install --save node-fetch@2.6.2 @types/node-fetch@2.6.2 react react-dom @types/react-dom lexical @lexical/react @lexical/headless @lexical/yjs jsdom ws dotenv yjs y-websocket cmd-ts http-status-codes
-ts-node src/index.ts $RESULT_DIR
+npm install --save node-fetch@2.6.2 @types/node-fetch@2.6.2 ws dotenv cmd-ts http-status-codes
+ts-node src/index.ts importer $RESULT_DIR
