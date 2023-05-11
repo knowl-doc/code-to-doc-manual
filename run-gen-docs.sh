@@ -19,9 +19,10 @@ then
 fi
 RESULT_DIR="result"
 RESULT_DIR=$(get_abs_filename ${RESULT_DIR})
-echo RESULT_DIR
-
 mkdir -p ${RESULT_DIR}
+
+REPO_PATH=${1}
+REPO_PATH=$(get_abs_filename ${REPO_PATH})
 
 verify_wget() {
     BIN_WGET=$(which wget) || {
@@ -92,5 +93,5 @@ cat $RESULT_DIR/id_to_pages.json
 cd ../knowl-utils
 npm install -g typescript@4.8.4
 npm install --save-dev -g ts-node@10.9.1
-npm install --save node-fetch@2.6.2 @types/node-fetch@2.6.2 ws dotenv cmd-ts http-status-codes
+npm install --save node-fetch@2.6.2 @types/node-fetch@2.6.2 dotenv cmd-ts http-status-codes
 ts-node src/index.ts importer $RESULT_DIR
