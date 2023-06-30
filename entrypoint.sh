@@ -4,7 +4,9 @@ repo=$GITHUB_REPOSITORY
 IFS="/" read -ra components <<< "$repo"
 owner=${components[0]}
 repository=${components[1]}
-
+echo $repo
+echo $owner
+echo $repository
 export COMMIT_SHA="$GITHUB_SHA"
 export REPO_NAME="$repository"
 export OWNER_NAME="$owner"
