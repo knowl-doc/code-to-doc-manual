@@ -13,5 +13,6 @@ export BRANCH_NAME="$GITHUB_REF_NAME"
 export GIT_PLATFORM="github"
 export PROJECT_NAME="$repository"
 
+git config --global --add safe.directory $GITHUB_WORKSPACE
 cd /usr/app
 ./start_doc_gen.sh $GITHUB_WORKSPACE
