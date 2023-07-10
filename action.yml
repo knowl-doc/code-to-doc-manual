@@ -1,5 +1,9 @@
-name: Generate-AI-docs
-description: Generate AI doc
+name: Knowl Code Docs
+author: Knowl
+description: Generate code docs for the entire repo with Knowl AI
+branding:
+  icon: 'book-open'  
+  color: 'blue'
 inputs:
   OPENAI_API_KEY:
     description: OPENAI_API_KEY
